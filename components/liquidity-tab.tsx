@@ -27,17 +27,17 @@ export default function LiquidityTab() {
       </div>
 
       <Tabs defaultValue="add" className="w-full">
-        <TabsList className="grid w-full grid-cols-2 mb-4 p-1.5 h-11">
+        <TabsList className="grid w-full grid-cols-2 mb-4 p-0 h-11 bg-gray-100 dark:bg-gray-800 rounded-lg overflow-hidden">
           <TabsTrigger 
             value="add" 
-            className="flex items-center justify-center gap-2 rounded-lg py-2.5 px-4 text-sm font-medium transition-all duration-200"
+            className="flex items-center justify-center gap-2 rounded-none py-2.5 px-4 text-sm font-medium transition-all duration-200 data-[state=active]:bg-white data-[state=active]:text-gray-900 dark:data-[state=active]:bg-gray-900 dark:data-[state=active]:text-white text-gray-600 dark:text-gray-400 h-full"
           >
             <ArrowUpDown className="w-4 h-4" />
             <span>Add</span>
           </TabsTrigger>
           <TabsTrigger 
             value="remove" 
-            className="flex items-center justify-center gap-2 rounded-lg py-2.5 px-4 text-sm font-medium transition-all duration-200"
+            className="flex items-center justify-center gap-2 rounded-none py-2.5 px-4 text-sm font-medium transition-all duration-200 data-[state=active]:bg-white data-[state=active]:text-gray-900 dark:data-[state=active]:bg-gray-900 dark:data-[state=active]:text-white text-gray-600 dark:text-gray-400 h-full"
           >
             <Droplets className="w-4 h-4" />
             <span>Remove</span>

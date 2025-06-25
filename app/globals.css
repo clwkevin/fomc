@@ -409,84 +409,6 @@
   animation: slideIn 0.3s ease-out;
 }
 
-/* Token selector styles */
-.token-logo {
-  @apply w-6 h-6 rounded-full overflow-hidden border border-gray-200 dark:border-gray-700;
-}
-
-.token-symbol {
-  @apply font-medium text-gray-900 dark:text-gray-100;
-}
-
-/* Status indicators */
-.status-dot {
-  @apply w-2 h-2 rounded-full;
-}
-
-.status-connected {
-  @apply bg-green-500;
-}
-
-.status-disconnected {
-  @apply bg-red-500;
-}
-
-/* Clean scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-}
-
-::-webkit-scrollbar-track {
-  @apply bg-gray-100 dark:bg-gray-800;
-}
-
-::-webkit-scrollbar-thumb {
-  @apply bg-gray-300 dark:bg-gray-600 rounded-full;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  @apply bg-gray-400 dark:bg-gray-500;
-}
-
-/* Enhanced Tab Component Overrides */
-[data-radix-tabs-list] {
-  @apply bg-gray-100 dark:bg-gray-800 rounded-xl p-1.5;
-  height: 48px;
-}
-
-[data-radix-tabs-trigger] {
-  @apply flex items-center justify-center gap-2 rounded-lg font-medium transition-all duration-200 text-gray-600 dark:text-gray-400;
-  padding: 10px 16px;
-  min-height: 36px;
-}
-
-[data-radix-tabs-trigger][data-state="active"] {
-  @apply bg-white shadow-sm text-gray-900 dark:bg-gray-900 dark:text-white;
-}
-
-[data-radix-tabs-trigger]:hover {
-  @apply text-gray-900 dark:text-white;
-}
-
-/* Mobile tab optimizations */
-@media (max-width: 640px) {
-  [data-radix-tabs-list] {
-    height: 44px;
-    padding: 6px;
-  }
-  
-  [data-radix-tabs-trigger] {
-    padding: 8px 12px;
-    min-height: 32px;
-    font-size: 14px;
-  }
-  
-  [data-radix-tabs-trigger] svg {
-    width: 16px;
-    height: 16px;
-  }
-}
-
 /* Gradient text */
 .gradient-text {
   background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-dark)));
@@ -498,4 +420,29 @@
 /* Gradient background */
 .gradient-bg {
   background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-dark)));
+}
+
+/* Enhanced Swap Arrow */
+.swap-arrow-wrapper {
+  background: hsl(var(--background));
+  border: 2px solid hsl(var(--border));
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-center;
+  z-index: 10;
+  margin: -12px auto;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--shadow-md);
+  position: relative;
+}
+
+.swap-arrow-wrapper:hover {
+  transform: rotate(180deg);
+  background: hsl(var(--primary));
+  border-color: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
 }
