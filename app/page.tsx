@@ -6,19 +6,8 @@ import { ArrowUpDown, Droplets } from "lucide-react"
 export default function Home() {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
-      {/* Hero Section - Simplified */}
-      <section className="hero-gradient pt-20 pb-12">
-        <div className="container mx-auto px-4 max-w-6xl">
-          <div className="text-center mb-12">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 text-gray-900 dark:text-white">
-              <span className="text-primary">AllSwap</span>
-            </h1>
-          </div>
-        </div>
-      </section>
-
-      {/* Trading Interface */}
-      <section className="py-8 -mt-6">
+      {/* Clean Trading Interface - Centered */}
+      <section className="pt-24 pb-12">
         <div className="container mx-auto px-4 max-w-md">
           <div className="card-clean p-6 animate-fade-in">
             <Tabs defaultValue="swap" className="w-full">
