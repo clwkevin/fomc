@@ -246,7 +246,7 @@ export default function TokenSelector({ onSelect, selectedToken, otherToken, sho
       <Button
         variant="outline"
         onClick={() => setIsOpen(true)}
-        className="flex items-center gap-2 h-10 px-3 rounded-lg border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 transition-colors w-[120px] sm:w-[140px] justify-between hover:bg-[#FBFAF9] hover:text-foreground dark:hover:text-white"
+        className="flex items-center gap-2 h-10 px-3 rounded-lg border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 transition-colors w-[120px] sm:w-[140px] justify-between hover:bg-gray-200 hover:text-white dark:hover:bg-gray-700 dark:hover:text-white"
       >
         {selectedToken ? (
           <div className="flex items-center gap-2 min-w-0 w-full">
@@ -333,7 +333,7 @@ export default function TokenSelector({ onSelect, selectedToken, otherToken, sho
                     className={`flex items-center justify-between p-3 rounded-lg cursor-pointer transition-all duration-200 ${
                       selectedToken?.address === token.address 
                         ? "bg-primary/10 border border-primary/20" 
-                        : "hover:bg-muted/50"
+                        : "hover:bg-gray-200 hover:text-white dark:hover:bg-gray-700 dark:hover:text-white"
                     } ${otherToken?.address === token.address ? "opacity-50 cursor-not-allowed" : ""}`}
                     onClick={() => otherToken?.address !== token.address && handleSelect(token)}
                   >
