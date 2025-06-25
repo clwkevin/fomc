@@ -43,83 +43,16 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.variable} ${spaceGrotesk.variable} layout-body`}>
+      <body className={`${inter.variable} ${spaceGrotesk.variable} bg-gray-50 dark:bg-gray-950`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Web3Provider>
-            {/* Enhanced Header with backdrop blur */}
-            <header className="layout-header">
-              <Header />
-            </header>
+            {/* Clean Header */}
+            <Header />
             
-            {/* Main Content Area */}
-            <main className="layout-main">
-              {/* Background Pattern */}
-              <div className="layout-bg-pattern" />
-              
-              {/* Content Container */}
-              <div className="layout-content">
-                {children}
-              </div>
+            {/* Main Content */}
+            <main className="min-h-screen">
+              {children}
             </main>
-            
-            {/* Enhanced Footer */}
-            <footer className="layout-footer">
-              <div className="footer-container">
-                <div className="footer-content">
-                  {/* Brand Section */}
-                  <div className="footer-brand">
-                    <div className="brand-header">
-                      <div className="brand-logo">
-                        <span className="brand-icon">A</span>
-                      </div>
-                      <span className="brand-name">
-                        Allswap
-                      </span>
-                    </div>
-                    <p className="brand-description">
-                      Professional DeFi trading platform built for the future of finance.
-                    </p>
-                  </div>
-                  
-                  {/* Navigation Links */}
-                  <nav className="footer-nav">
-                    <div className="nav-section">
-                      <h4 className="nav-title">Resources</h4>
-                      <div className="nav-links">
-                        <a href="/docs" className="nav-link">
-                          Documentation
-                        </a>
-                      </div>
-                    </div>
-                    
-                    <div className="nav-section">
-                      <h4 className="nav-title">Legal</h4>
-                      <div className="nav-links">
-                        <a href="/terms" className="nav-link">
-                          Terms of Service
-                        </a>
-                        <a href="/privacy" className="nav-link">
-                          Privacy Policy
-                        </a>
-                      </div>
-                    </div>
-                  </nav>
-                </div>
-                
-                {/* Bottom Section */}
-                <div className="footer-bottom">
-                  <p className="footer-copyright">
-                    © {new Date().getFullYear()} Allswap Protocol. All rights reserved.
-                  </p>
-                  <div className="footer-status">
-                    <div className="status-indicator">
-                      <div className="status-dot status-connected" />
-                      <span className="status-text">Network</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </footer>
             
             <Toaster />
           </Web3Provider>

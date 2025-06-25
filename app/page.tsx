@@ -1,6 +1,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import SwapTab from "@/components/swap-tab"
 import LiquidityTab from "@/components/liquidity-tab"
+import Footer from "@/components/footer"
 import { ArrowUpDown, Droplets } from "lucide-react"
 
 export default function Home() {
@@ -38,6 +39,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Clean Footer */}
+      <Footer />
     </div>
   )
 }
