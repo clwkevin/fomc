@@ -139,6 +139,30 @@
   background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
 }
 
+/* Enhanced Tab Styles for Mobile */
+.tabs-list-enhanced {
+  @apply grid w-full grid-cols-2 bg-gray-100 dark:bg-gray-800 rounded-xl p-1.5;
+  height: 48px; /* Fixed height for consistency */
+}
+
+.tab-trigger-enhanced {
+  @apply flex items-center justify-center gap-2 rounded-lg font-medium transition-all duration-200;
+  padding: 10px 16px; /* Fixed padding for mobile */
+  min-height: 36px; /* Minimum touch target */
+}
+
+.tab-trigger-enhanced[data-state="active"] {
+  @apply bg-white shadow-sm text-gray-900 dark:bg-gray-900 dark:text-white;
+}
+
+.tab-trigger-enhanced[data-state="inactive"] {
+  @apply text-gray-600 dark:text-gray-400;
+}
+
+.tab-trigger-enhanced:hover {
+  @apply text-gray-900 dark:text-white;
+}
+
 /* Mobile-first responsive design */
 @media (max-width: 640px) {
   .card-clean {
@@ -155,6 +179,23 @@
   
   .section-title {
     @apply text-lg;
+  }
+  
+  /* Enhanced mobile tab styling */
+  .tabs-list-enhanced {
+    height: 44px;
+    padding: 6px;
+  }
+  
+  .tab-trigger-enhanced {
+    padding: 8px 12px;
+    min-height: 32px;
+    font-size: 14px;
+  }
+  
+  .tab-trigger-enhanced .lucide {
+    width: 16px;
+    height: 16px;
   }
 }
 
@@ -214,4 +255,43 @@
 
 ::-webkit-scrollbar-thumb:hover {
   @apply bg-gray-400 dark:bg-gray-500;
+}
+
+/* Enhanced Tab Component Overrides */
+[data-radix-tabs-list] {
+  @apply bg-gray-100 dark:bg-gray-800 rounded-xl p-1.5;
+  height: 48px;
+}
+
+[data-radix-tabs-trigger] {
+  @apply flex items-center justify-center gap-2 rounded-lg font-medium transition-all duration-200 text-gray-600 dark:text-gray-400;
+  padding: 10px 16px;
+  min-height: 36px;
+}
+
+[data-radix-tabs-trigger][data-state="active"] {
+  @apply bg-white shadow-sm text-gray-900 dark:bg-gray-900 dark:text-white;
+}
+
+[data-radix-tabs-trigger]:hover {
+  @apply text-gray-900 dark:text-white;
+}
+
+/* Mobile tab optimizations */
+@media (max-width: 640px) {
+  [data-radix-tabs-list] {
+    height: 44px;
+    padding: 6px;
+  }
+  
+  [data-radix-tabs-trigger] {
+    padding: 8px 12px;
+    min-height: 32px;
+    font-size: 14px;
+  }
+  
+  [data-radix-tabs-trigger] svg {
+    width: 16px;
+    height: 16px;
+  }
 }
