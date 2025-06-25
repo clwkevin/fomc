@@ -43,7 +43,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.variable} ${spaceGrotesk.variable} bg-gray-50 dark:bg-gray-950`}>
+      <body className={`${inter.variable} ${spaceGrotesk.variable} bg-[#FBFAF9] dark:bg-gray-950`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Web3Provider>
             {/* Clean Header */}

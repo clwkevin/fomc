@@ -355,9 +355,23 @@ export default function SwapTab() {
       <div className="p-4 sm:p-6 space-y-4">
         <div className="flex justify-between items-center">
           <h2 className="text-lg sm:text-xl font-semibold">Swap</h2>
+          <Button 
+            variant="outline" 
+            size="sm" 
+            className="gap-1 h-7 sm:h-8 px-2 rounded-lg"
+            onClick={() => setShowSlippageSettings(true)}
+          >
+            <Settings className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
+            <span className="text-xs sm:text-sm">Slippage: {slippage}%</span>
+          </Button>
         </div>
 
-        <SlippageSettings slippage={slippage} onSlippageChange={setSlippage} open={showSlippageSettings} onOpenChange={setShowSlippageSettings} />
+        <SlippageSettings 
+          slippage={slippage} 
+          onSlippageChange={setSlippage} 
+          open={showSlippageSettings} 
+          onOpenChange={setShowSlippageSettings} 
+        />
 
         {isConnected && !isCorrectNetwork && (
           <div className="p-3 rounded-lg bg-destructive/10 border border-destructive flex items-center gap-2 text-destructive text-sm animate-in">

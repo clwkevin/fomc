@@ -235,19 +235,10 @@ export default function TokenSelector({ onSelect, selectedToken, otherToken, sho
   const formatBalance = (balance: string) => {
     if (!balance || balance === "0") return "0"
     const num = Number(balance);
-    // If balance is less than 0.0001, show it in scientific notation
     if (num < 0.0001 && num > 0) {
       return num.toExponential(2);
     }
-    // Truncate to 4 significant digits for large numbers
     return num.toLocaleString(undefined, { maximumSignificantDigits: 4 });
-  }
-
-  const formatBalanceUSD = (balance: string) => {
-    if (!balance || balance === "0") return "$0.00"
-    const num = Number(balance);
-    if (num < 0.01) return "<$0.01"
-    return `$${num.toFixed(2)}`
   }
 
   return (
@@ -255,47 +246,46 @@ export default function TokenSelector({ onSelect, selectedToken, otherToken, sho
       <Button
         variant="outline"
         onClick={() => setIsOpen(true)}
-        className="modern-token-selector-btn"
+        className="flex items-center gap-2 h-10 px-3 rounded-lg border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 transition-colors w-[120px] sm:w-[140px] justify-between"
       >
         {selectedToken ? (
-          <div className="token-selector-content">
+          <div className="flex items-center gap-2 min-w-0 w-full">
             {selectedToken.logoURI ? (
-              <div className="token-logo">
+              <div className="w-5 h-5 rounded-full overflow-hidden border border-gray-200 dark:border-gray-700 flex-shrink-0">
                 <Image
                   src={selectedToken.logoURI}
                   alt={selectedToken.symbol}
-                  width={24}
-                  height={24}
-                  className="token-img"
+                  width={20}
+                  height={20}
+                  className="w-full h-full object-cover"
                   onError={(e) => {
                     (e.target as HTMLImageElement).src = "/placeholder.svg"
                   }}
                 />
               </div>
             ) : (
-              <div className="token-logo-fallback">
+              <div className="w-5 h-5 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-gray-600 dark:text-gray-400 font-medium text-xs flex-shrink-0">
                 {selectedToken.symbol.charAt(0)}
               </div>
             )}
-            <span className="token-symbol">{selectedToken.symbol}</span>
+            <span className="font-medium text-sm truncate">{selectedToken.symbol}</span>
           </div>
         ) : (
-          "Select Token"
+          <span className="text-sm text-gray-500 dark:text-gray-400 truncate">Select Token</span>
         )}
-        <ChevronDown className="selector-arrow" />
+        <ChevronDown className="w-4 h-4 opacity-60 flex-shrink-0 ml-auto" />
       </Button>
 
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        <DialogContent className="modern-token-dialog" hideCloseButton={true}>
-          {/* Accessible Dialog Title - hidden visually but available for screen readers */}
+        <DialogContent className="bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-800 max-w-md w-[95vw] sm:w-full" hideCloseButton={true}>
           <DialogTitle className="sr-only">Select Token Dialog</DialogTitle>
           
           {/* Custom Header */}
-          <div className="dialog-header">
-            <h2 className="dialog-title">Select Token</h2>
+          <div className="flex items-center justify-between p-6 pb-4">
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Select Token</h2>
             <button
               onClick={() => setIsOpen(false)}
-              className="close-btn"
+              className="w-8 h-8 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 flex items-center justify-center text-gray-500 dark:text-gray-400 transition-colors"
               aria-label="Close"
             >
               <X className="w-5 h-5" />
@@ -303,13 +293,13 @@ export default function TokenSelector({ onSelect, selectedToken, otherToken, sho
           </div>
 
           {/* Search */}
-          <div className="search-container">
-            <div className="search-input-wrapper">
-              <Search className="search-icon" />
-              <input
+          <div className="px-6 pb-4">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+              <Input
                 type="text"
                 placeholder="Search name or paste address"
-                className="search-input"
+                className="pl-10 h-12 rounded-lg border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800"
                 value={searchQuery}
                 onChange={handleInputChange}
               />
@@ -318,105 +308,99 @@ export default function TokenSelector({ onSelect, selectedToken, otherToken, sho
 
           {/* Loading State */}
           {isLoadingCustomToken && (
-            <div className="loading-state">
-              <Loader2 className="loading-icon" />
+            <div className="flex items-center gap-2 px-6 py-3 text-gray-500 dark:text-gray-400">
+              <Loader2 className="w-4 h-4 animate-spin" />
               <span>Fetching token info...</span>
             </div>
           )}
 
           {/* Error State */}
           {error && (
-            <div className="error-state">
-              <AlertCircle className="error-icon" />
-              <span>{error}</span>
-            </div>
-          )}
-
-          {/* Network Warning */}
-          {isConnected && !currentNetwork && !isLoadingCustomToken && !error && searchQuery && isValidAddress(searchQuery) && (
-            <div className="warning-state">
-              <AlertCircle className="warning-icon" />
-              <span>Connect to a supported network to add this token.</span>
+            <div className="mx-6 mb-4">
+              <Alert className="border-red-200 dark:border-red-800 bg-red-50 dark:bg-red-950/20">
+                <AlertCircle className="h-4 w-4 text-red-600 dark:text-red-400" />
+                <AlertDescription className="text-red-700 dark:text-red-400">
+                  {error}
+                </AlertDescription>
+              </Alert>
             </div>
           )}
 
           {/* Tokens Section */}
-          <div className="tokens-section">
-            {/* Popular Tokens Header */}
+          <div className="max-h-80 overflow-y-auto px-6 pb-6">
             {!searchQuery && (
-              <div className="section-header">
-                <h3 className="section-title">Your Tokens</h3>
+              <div className="mb-3">
+                <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide">
+                  Your Tokens
+                </h3>
               </div>
             )}
 
-            {/* Token List */}
-            <div className="token-list">
+            <div className="space-y-1">
               {displayTokens.length === 0 && !isLoadingCustomToken && !error ? (
-                <div className="empty-state">
+                <div className="text-center py-8 text-gray-500 dark:text-gray-400">
                   <p>No tokens found.</p>
                 </div>
               ) : (
                 displayTokens.map((token) => (
                   <div
                     key={token.address}
-                    className={`token-item ${
-                      selectedToken?.address === token.address ? "selected" : ""
-                    } ${otherToken?.address === token.address ? "disabled" : ""}`}
+                    className={`flex items-center justify-between p-3 rounded-lg cursor-pointer transition-all duration-200 ${
+                      selectedToken?.address === token.address 
+                        ? "bg-primary/10 border border-primary/20" 
+                        : "hover:bg-gray-50 dark:hover:bg-gray-800"
+                    } ${otherToken?.address === token.address ? "opacity-50 cursor-not-allowed" : ""}`}
                     onClick={() => otherToken?.address !== token.address && handleSelect(token)}
-                    role="button"
-                    aria-disabled={otherToken?.address === token.address}
                   >
-                    <div className="token-info">
+                    <div className="flex items-center gap-3 min-w-0 flex-1">
                       {token.logoURI ? (
-                        <div className="token-item-logo">
+                        <div className="w-10 h-10 rounded-full overflow-hidden border border-gray-200 dark:border-gray-700 flex-shrink-0">
                           <Image
                             src={token.logoURI}
                             alt={token.symbol}
                             width={40}
                             height={40}
-                            className="token-item-img"
+                            className="w-full h-full object-cover"
                             onError={(e) => {
                               (e.target as HTMLImageElement).src = "/placeholder.svg"
                             }}
                           />
-                          {/* Network Badge */}
-                          <div className="network-badge">
-                            <div className="network-icon" />
-                          </div>
                         </div>
                       ) : (
-                        <div className="token-item-logo-fallback">
+                        <div className="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-gray-600 dark:text-gray-400 font-medium flex-shrink-0">
                           {token.symbol.charAt(0)}
                         </div>
                       )}
-                      <div className="token-details">
-                        <div className="token-name-row">
-                          <h4 className="token-name">{token.symbol}</h4>
+                      <div className="min-w-0 flex-1">
+                        <div className="flex items-center gap-2 mb-1">
+                          <h4 className="font-medium text-gray-900 dark:text-gray-100 truncate">{token.symbol}</h4>
                           {token.isCustom && (
-                            <span className="custom-badge">Custom</span>
+                            <span className="text-xs font-medium text-primary bg-primary/10 px-2 py-0.5 rounded flex-shrink-0">
+                              Custom
+                            </span>
                           )}
                         </div>
-                        <p className="token-full-name">{token.name}</p>
+                        <p className="text-sm text-gray-500 dark:text-gray-400 truncate">{token.name}</p>
                         {!token.isNative && (
-                          <p className="token-address">{truncateAddress(token.address)}</p>
+                          <p className="text-xs text-gray-400 dark:text-gray-500 font-mono">{truncateAddress(token.address)}</p>
                         )}
                       </div>
                     </div>
                     
                     {isConnected && showBalance && (
-                      <div className="token-balance">
+                      <div className="text-right flex-shrink-0 ml-2">
                         {tokenBalances[token.address]?.isLoading ? (
-                          <div className="balance-loading">
+                          <div className="space-y-1">
                             <Skeleton className="h-4 w-16" />
                             <Skeleton className="h-3 w-12" />
                           </div>
                         ) : (
-                          <div className="balance-info">
-                            <span className="balance-amount">
+                          <div className="space-y-1">
+                            <span className="text-sm font-medium text-gray-900 dark:text-gray-100 block">
                               {formatBalance(tokenBalances[token.address]?.balance || "0")}
                             </span>
-                            <span className="balance-usd">
-                              {formatBalanceUSD("0")}
+                            <span className="text-xs text-gray-500 dark:text-gray-400 block">
+                              $0.00
                             </span>
                           </div>
                         )}
