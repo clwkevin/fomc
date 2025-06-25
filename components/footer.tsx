@@ -7,16 +7,11 @@ export default function Footer() {
     <footer className="border-t border-gray-200 dark:border-gray-800 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md">
       <div className="container mx-auto px-4 max-w-6xl py-6">
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-          {/* Logo and Brand */}
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center text-white font-bold text-lg shadow-lg">
-              A
-            </div>
-            <div className="text-center md:text-left">
-              <p className="text-sm text-gray-500 dark:text-gray-400">
-                © 2025 AllSwap. All rights reserved.
-              </p>
-            </div>
+          {/* Copyright */}
+          <div className="text-center md:text-left">
+            <p className="text-sm text-gray-500 dark:text-gray-400">
+              © 2025 AllSwap. All rights reserved.
+            </p>
           </div>
 
           {/* Navigation Links - Only essential links as requested */}
