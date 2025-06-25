@@ -12,6 +12,11 @@ export default function Footer() {
             <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center text-white font-bold text-lg shadow-lg">
               A
             </div>
+            <div className="text-center md:text-left">
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                © 2025 AllSwap. All rights reserved.
+              </p>
+            </div>
           </div>
 
           {/* Navigation Links - Only essential links as requested */}
@@ -35,13 +40,6 @@ export default function Footer() {
               Terms
             </Link>
           </div>
-        </div>
-
-        {/* Copyright */}
-        <div className="mt-6 pt-4 border-t border-gray-200 dark:border-gray-800 text-center md:text-left">
-          <p className="text-xs text-gray-500 dark:text-gray-400">
-            © 2025 AllSwap. All rights reserved.
-          </p>
         </div>
       </div>
     </footer>
