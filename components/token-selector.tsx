@@ -246,7 +246,7 @@ export default function TokenSelector({ onSelect, selectedToken, otherToken, sho
       <Button
         variant="outline"
         onClick={() => setIsOpen(true)}
-        className="flex items-center gap-2 h-10 px-3 rounded-lg border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 transition-colors w-[120px] sm:w-[140px] justify-between"
+        className="flex items-center gap-2 h-10 px-3 rounded-lg border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 transition-colors w-[120px] sm:w-[140px] justify-between hover:bg-[#FBFAF9] hover:text-foreground dark:hover:text-white"
       >
         {selectedToken ? (
           <div className="flex items-center gap-2 min-w-0 w-full">
@@ -264,7 +264,7 @@ export default function TokenSelector({ onSelect, selectedToken, otherToken, sho
                 />
               </div>
             ) : (
-              <div className="w-5 h-5 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-gray-600 dark:text-gray-400 font-medium text-xs flex-shrink-0">
+              <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center text-primary font-medium text-xs flex-shrink-0">
                 {selectedToken.symbol.charAt(0)}
               </div>
             )}
@@ -277,89 +277,74 @@ export default function TokenSelector({ onSelect, selectedToken, otherToken, sho
       </Button>
 
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        <DialogContent className="bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-800 max-w-md w-[95vw] sm:w-full" hideCloseButton={true}>
-          <DialogTitle className="sr-only">Select Token Dialog</DialogTitle>
-          
-          {/* Custom Header */}
-          <div className="flex items-center justify-between p-6 pb-4">
-            <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Select Token</h2>
-            <button
-              onClick={() => setIsOpen(false)}
-              className="w-8 h-8 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 flex items-center justify-center text-gray-500 dark:text-gray-400 transition-colors"
-              aria-label="Close"
-            >
-              <X className="w-5 h-5" />
-            </button>
-          </div>
-
-          {/* Search */}
-          <div className="px-6 pb-4">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+        <DialogContent className="bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-800 max-w-md w-[95vw] sm:w-full p-0" hideCloseButton={true}>
+          <div className="p-4 border-b border-gray-200 dark:border-gray-800">
+            <div className="flex items-center justify-between">
+              <DialogTitle className="text-lg font-semibold">Select Token</DialogTitle>
+              <Button
+                onClick={() => setIsOpen(false)}
+                variant="ghost"
+                size="icon"
+                className="h-8 w-8 rounded-full"
+              >
+                <X className="h-4 w-4" />
+                <span className="sr-only">Close</span>
+              </Button>
+            </div>
+            
+            <div className="mt-4 relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
               <Input
                 type="text"
                 placeholder="Search name or paste address"
-                className="pl-10 h-12 rounded-lg border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800"
+                className="pl-10 pr-4 py-2 h-11"
                 value={searchQuery}
                 onChange={handleInputChange}
               />
             </div>
           </div>
 
-          {/* Loading State */}
           {isLoadingCustomToken && (
-            <div className="flex items-center gap-2 px-6 py-3 text-gray-500 dark:text-gray-400">
+            <div className="flex items-center gap-2 px-4 py-3 text-muted-foreground">
               <Loader2 className="w-4 h-4 animate-spin" />
               <span>Fetching token info...</span>
             </div>
           )}
 
-          {/* Error State */}
           {error && (
-            <div className="mx-6 mb-4">
-              <Alert className="border-red-200 dark:border-red-800 bg-red-50 dark:bg-red-950/20">
-                <AlertCircle className="h-4 w-4 text-red-600 dark:text-red-400" />
-                <AlertDescription className="text-red-700 dark:text-red-400">
-                  {error}
-                </AlertDescription>
+            <div className="px-4 py-2">
+              <Alert variant="destructive" className="py-2">
+                <AlertCircle className="h-4 w-4" />
+                <AlertDescription className="text-xs">{error}</AlertDescription>
               </Alert>
             </div>
           )}
 
-          {/* Tokens Section */}
-          <div className="max-h-80 overflow-y-auto px-6 pb-6">
-            {!searchQuery && (
-              <div className="mb-3">
-                <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide">
-                  Your Tokens
-                </h3>
+          <div className="max-h-[320px] overflow-y-auto p-2">
+            {displayTokens.length === 0 && !isLoadingCustomToken && !error ? (
+              <div className="text-center py-8 text-muted-foreground">
+                <p>No tokens found.</p>
               </div>
-            )}
-
-            <div className="space-y-1">
-              {displayTokens.length === 0 && !isLoadingCustomToken && !error ? (
-                <div className="text-center py-8 text-gray-500 dark:text-gray-400">
-                  <p>No tokens found.</p>
-                </div>
-              ) : (
-                displayTokens.map((token) => (
+            ) : (
+              <div className="space-y-1">
+                {displayTokens.map((token) => (
                   <div
                     key={token.address}
                     className={`flex items-center justify-between p-3 rounded-lg cursor-pointer transition-all duration-200 ${
                       selectedToken?.address === token.address 
                         ? "bg-primary/10 border border-primary/20" 
-                        : "hover:bg-gray-50 dark:hover:bg-gray-800"
+                        : "hover:bg-muted/50"
                     } ${otherToken?.address === token.address ? "opacity-50 cursor-not-allowed" : ""}`}
                     onClick={() => otherToken?.address !== token.address && handleSelect(token)}
                   >
                     <div className="flex items-center gap-3 min-w-0 flex-1">
                       {token.logoURI ? (
-                        <div className="w-10 h-10 rounded-full overflow-hidden border border-gray-200 dark:border-gray-700 flex-shrink-0">
+                        <div className="w-9 h-9 rounded-full overflow-hidden border border-gray-200 dark:border-gray-700 flex-shrink-0">
                           <Image
                             src={token.logoURI}
                             alt={token.symbol}
-                            width={40}
-                            height={40}
+                            width={36}
+                            height={36}
                             className="w-full h-full object-cover"
                             onError={(e) => {
                               (e.target as HTMLImageElement).src = "/placeholder.svg"
@@ -367,22 +352,22 @@ export default function TokenSelector({ onSelect, selectedToken, otherToken, sho
                           />
                         </div>
                       ) : (
-                        <div className="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-gray-600 dark:text-gray-400 font-medium flex-shrink-0">
+                        <div className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center text-primary font-medium flex-shrink-0">
                           {token.symbol.charAt(0)}
                         </div>
                       )}
                       <div className="min-w-0 flex-1">
-                        <div className="flex items-center gap-2 mb-1">
-                          <h4 className="font-medium text-gray-900 dark:text-gray-100 truncate">{token.symbol}</h4>
+                        <div className="flex items-center gap-2 mb-0.5">
+                          <h4 className="font-medium text-foreground truncate">{token.symbol}</h4>
                           {token.isCustom && (
-                            <span className="text-xs font-medium text-primary bg-primary/10 px-2 py-0.5 rounded flex-shrink-0">
+                            <span className="text-xs font-medium text-primary bg-primary/10 px-1.5 py-0.5 rounded-full flex-shrink-0">
                               Custom
                             </span>
                           )}
                         </div>
-                        <p className="text-sm text-gray-500 dark:text-gray-400 truncate">{token.name}</p>
+                        <p className="text-xs text-muted-foreground truncate">{token.name}</p>
                         {!token.isNative && (
-                          <p className="text-xs text-gray-400 dark:text-gray-500 font-mono">{truncateAddress(token.address)}</p>
+                          <p className="text-xs text-muted-foreground/70 font-mono mt-0.5">{truncateAddress(token.address)}</p>
                         )}
                       </div>
                     </div>
@@ -395,21 +380,21 @@ export default function TokenSelector({ onSelect, selectedToken, otherToken, sho
                             <Skeleton className="h-3 w-12" />
                           </div>
                         ) : (
-                          <div className="space-y-1">
-                            <span className="text-sm font-medium text-gray-900 dark:text-gray-100 block">
+                          <div className="space-y-0.5">
+                            <span className="text-sm font-medium text-foreground block">
                               {formatBalance(tokenBalances[token.address]?.balance || "0")}
                             </span>
-                            <span className="text-xs text-gray-500 dark:text-gray-400 block">
-                              $0.00
+                            <span className="text-xs text-muted-foreground block">
+                              ${(Number(tokenBalances[token.address]?.balance || "0") * 0).toFixed(2)}
                             </span>
                           </div>
                         )}
                       </div>
                     )}
                   </div>
-                ))
-              )}
-            </div>
+                ))}
+              </div>
+            )}
           </div>
         </DialogContent>
       </Dialog>
