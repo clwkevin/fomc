@@ -13,17 +13,17 @@ export default function Home() {
           <div className="card-clean p-0 animate-fade-in shadow-lg border border-gray-200/50 dark:border-gray-800/50 rounded-xl overflow-hidden">
             <Tabs defaultValue="swap" className="w-full">
               {/* Tab Header */}
-              <TabsList className="grid w-full grid-cols-2 mb-0 bg-gray-100 dark:bg-gray-800 rounded-t-xl p-1.5 h-12">
+              <TabsList className="grid w-full grid-cols-2 mb-0 rounded-t-xl p-1.5 h-12">
                 <TabsTrigger 
                   value="swap" 
-                  className="flex items-center justify-center gap-2 rounded-lg py-2.5 px-4 text-sm font-medium transition-all duration-200 data-[state=active]:bg-white data-[state=active]:shadow-sm data-[state=active]:text-gray-900 dark:data-[state=active]:bg-gray-900 dark:data-[state=active]:text-white text-gray-600 dark:text-gray-400"
+                  className="flex items-center justify-center gap-2 rounded-lg py-2.5 px-4 text-sm font-medium transition-all duration-200"
                 >
                   <ArrowUpDown className="w-4 h-4" />
                   <span>Swap</span>
                 </TabsTrigger>
                 <TabsTrigger 
                   value="liquidity" 
-                  className="flex items-center justify-center gap-2 rounded-lg py-2.5 px-4 text-sm font-medium transition-all duration-200 data-[state=active]:bg-white data-[state=active]:shadow-sm data-[state=active]:text-gray-900 dark:data-[state=active]:bg-gray-900 dark:data-[state=active]:text-white text-gray-600 dark:text-gray-400"
+                  className="flex items-center justify-center gap-2 rounded-lg py-2.5 px-4 text-sm font-medium transition-all duration-200"
                 >
                   <Droplets className="w-4 h-4" />
                   <span>Pool</span>
