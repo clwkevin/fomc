@@ -37,6 +37,7 @@
     "@radix-ui/react-toggle": "latest",
     "@radix-ui/react-toggle-group": "latest",
     "@radix-ui/react-tooltip": "latest",
+    "@web3modal/wagmi": "^4.0.13",
     "autoprefixer": "^10.4.20",
     "axios": "^1.9.0",
     "class-variance-authority": "^0.7.1",
@@ -59,6 +60,8 @@
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7",
     "vaul": "latest",
+    "viem": "^2.7.16",
+    "wagmi": "^2.5.7",
     "zod": "^3.24.1"
   },
   "devDependencies": {
