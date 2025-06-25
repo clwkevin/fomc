@@ -44,7 +44,7 @@ export default function Footer() {
         {/* Copyright */}
         <div className="mt-6 pt-4 border-t border-gray-200 dark:border-gray-800 text-center md:text-left">
           <p className="text-xs text-gray-500 dark:text-gray-400">
-            © {new Date().getFullYear()} AllSwap. All rights reserved.
+            © 2025 AllSwap. All rights reserved.
           </p>
         </div>
       </div>
