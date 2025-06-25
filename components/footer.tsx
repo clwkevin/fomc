@@ -12,10 +12,6 @@ export default function Footer() {
             <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center text-white font-bold text-lg shadow-lg">
               A
             </div>
-            <div className="text-center md:text-left">
-              <h3 className="font-bold text-gray-900 dark:text-white">AllSwap</h3>
-              <p className="text-sm text-gray-500 dark:text-gray-400">Decentralized Exchange</p>
-            </div>
           </div>
 
           {/* Navigation Links - Only essential links as requested */}
